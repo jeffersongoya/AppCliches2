@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/05/08 00:27:26.000.444,=C:\Users\Jefferson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/08 00:40:01.000.786,=C:\Users\Jefferson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/26 16:09:29.000.451,=C:\Users\Jefferson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/26 16:11:30.000.231,D:\Desenvolvimento\Apps\AppCliches\uPrincipal.fmx=C:\Users\Jefferson\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2019/05/26 16:11:30.000.231,D:\Desenvolvimento\Apps\AppCliches\uPrincipal.pas=C:\Users\Jefferson\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/26 16:15:16.000.767,D:\Desenvolvimento\Apps\AppCliches\AppCliches.dproj=C:\Users\Jefferson\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2019/05/26 22:34:28.000.711,=D:\Desenvolvimento\Apps\AppCliches\data\database.db</Transaction>
+    <Transaction>2019/05/27 01:45:31.000.322,=D:\Desenvolvimento\Apps\AppCliches\Unit1.pas</Transaction>
+    <Transaction>2019/05/27 01:56:38.000.812,D:\Desenvolvimento\Apps\AppCliches\Unit1.fmx=D:\Desenvolvimento\Apps\AppCliches\uEspecificacao.fmx</Transaction>
+    <Transaction>2019/05/27 01:56:38.000.812,D:\Desenvolvimento\Apps\AppCliches\Unit1.pas=D:\Desenvolvimento\Apps\AppCliches\uEspecificacao.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="0037724804"/>
+	</ActiveMobileDevice>
+	<BT_BuildType>Debug</BT_BuildType>
+</BorlandProject>
