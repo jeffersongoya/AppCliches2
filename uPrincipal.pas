@@ -52,7 +52,7 @@ type
     Placa: TStringColumn;
     Estoque: TStringColumn;
     Button1: TButton;
-    TabItem1: TTabItem;
+    TabCadastro: TTabItem;
     Rectangle9: TRectangle;
     Rectangle10: TRectangle;
     Label6: TLabel;
@@ -133,7 +133,11 @@ type
     edtResult5: TEdit;
     VertScrollBox: TVertScrollBox;
     SpeedButton2: TSpeedButton;
-    VertScrollBox1: TVertScrollBox;
+    VertScrollBox_TabCalc: TVertScrollBox;
+    VertScrollBox_TabLog: TVertScrollBox;
+    VertScrollBox_TabPlc: TVertScrollBox;
+    VertScrollBox_TabCad: TVertScrollBox;
+    SpeedButton3: TSpeedButton;
     procedure btn_loginClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FDConnection1BeforeConnect(Sender: TObject);
@@ -164,6 +168,7 @@ type
     procedure tbc_principalChange(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure Rectangle8Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
   private
     UserLogon: Boolean;
     FKBBounds: TRectF;
@@ -175,6 +180,7 @@ type
     procedure UpdatePosition;
     function Numeros(AStr: string): Integer;
     procedure ClearEdits;
+    procedure EfetuaLogin;
     { Private declarations }
   public
     gEspecificacao: string;
@@ -202,20 +208,93 @@ var
   LFocusRect: TRectF;
 begin
   FNeedOffset := False;
-  if Assigned(LFocused) then
+
+  if tbc_principal.ActiveTab = TabCalculos then
   begin
-    LFocused := TControl(Focused.GetObject);
-    LFocusRect := LFocused.AbsoluteRect;
-    LFocusRect.Offset(VertScrollBox.ViewportPosition);
-    if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and (LFocusRect.Bottom > FKBBounds.Top) then
+    if Assigned(LFocused) then
     begin
-      FNeedOffset := True;
-      Layout1.Align := TAlignLayout.Horizontal;
-      VertScrollBox.RealignContent;
-      Application.ProcessMessages;
-      VertScrollBox.ViewportPosition := PointF(VertScrollBox.ViewportPosition.X, LFocusRect.Bottom -  FKBBounds.Top);
+      LFocused := TControl(Focused.GetObject);
+      LFocusRect := LFocused.AbsoluteRect;
+      LFocusRect.Offset(VertScrollBox_TabCalc.ViewportPosition);
+      if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and (LFocusRect.Bottom > FKBBounds.Top) then
+      begin
+        FNeedOffset := True;
+        Layout1.Align := TAlignLayout.Horizontal;
+        VertScrollBox_TabCalc.RealignContent;
+        Application.ProcessMessages;
+        VertScrollBox_TabCalc.ViewportPosition := PointF(VertScrollBox_TabCalc.ViewportPosition.X, LFocusRect.Bottom -  FKBBounds.Top);
+      end;
+    end;
+  end
+  else if tbc_principal.ActiveTab = tabLogin then
+  begin
+    if Assigned(LFocused) then
+    begin
+      LFocused := TControl(Focused.GetObject);
+      LFocusRect := LFocused.AbsoluteRect;
+      LFocusRect.Offset(VertScrollBox_TabLog.ViewportPosition);
+      if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and (LFocusRect.Bottom > FKBBounds.Top) then
+      begin
+        FNeedOffset := True;
+        Layout1.Align := TAlignLayout.Horizontal;
+        VertScrollBox_TabLog.RealignContent;
+        Application.ProcessMessages;
+        VertScrollBox_TabLog.ViewportPosition := PointF(VertScrollBox_TabLog.ViewportPosition.X, LFocusRect.Bottom -  FKBBounds.Top);
+      end;
+    end;
+  end
+  else if tbc_principal.ActiveTab = TabPlacas then
+  begin
+    if Assigned(LFocused) then
+    begin
+      LFocused := TControl(Focused.GetObject);
+      LFocusRect := LFocused.AbsoluteRect;
+      LFocusRect.Offset(VertScrollBox_TabPlc.ViewportPosition);
+      if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and (LFocusRect.Bottom > FKBBounds.Top) then
+      begin
+        FNeedOffset := True;
+        Layout1.Align := TAlignLayout.Horizontal;
+        VertScrollBox_TabPlc.RealignContent;
+        Application.ProcessMessages;
+        VertScrollBox_TabPlc.ViewportPosition := PointF(VertScrollBox_TabPlc.ViewportPosition.X, LFocusRect.Bottom -  FKBBounds.Top);
+      end;
+    end;
+  end
+  else if tbc_principal.ActiveTab = TabCadastro then
+  begin
+    if Assigned(LFocused) then
+    begin
+      LFocused := TControl(Focused.GetObject);
+      LFocusRect := LFocused.AbsoluteRect;
+      LFocusRect.Offset(VertScrollBox_TabCad.ViewportPosition);
+      if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and (LFocusRect.Bottom > FKBBounds.Top) then
+      begin
+        FNeedOffset := True;
+        Layout1.Align := TAlignLayout.Horizontal;
+        VertScrollBox_TabCad.RealignContent;
+        Application.ProcessMessages;
+        VertScrollBox_TabCad.ViewportPosition := PointF(VertScrollBox_TabCad.ViewportPosition.X, LFocusRect.Bottom -  FKBBounds.Top);
+      end;
+    end;
+  end
+  else
+  begin
+    if Assigned(LFocused) then
+    begin
+      LFocused := TControl(Focused.GetObject);
+      LFocusRect := LFocused.AbsoluteRect;
+      LFocusRect.Offset(VertScrollBox.ViewportPosition);
+      if (LFocusRect.IntersectsWith(TRectF.Create(FKBBounds))) and (LFocusRect.Bottom > FKBBounds.Top) then
+      begin
+        FNeedOffset := True;
+        Layout1.Align := TAlignLayout.Horizontal;
+        VertScrollBox.RealignContent;
+        Application.ProcessMessages;
+        VertScrollBox.ViewportPosition := PointF(VertScrollBox.ViewportPosition.X, LFocusRect.Bottom -  FKBBounds.Top);
+      end;
     end;
   end;
+
   if not FNeedOffset then
     RestorePosition;
 end;
@@ -227,15 +306,77 @@ end;
 
 procedure TPrincipal.RestorePosition;
 begin
-  VertScrollBox.ViewportPosition := PointF(VertScrollBox.ViewportPosition.X, 0);
-  Layout1.Align := TAlignLayout.Client;
-  VertScrollBox.RealignContent;
+  if tbc_principal.ActiveTab = TabCalculos then
+  begin
+    VertScrollBox_TabCalc.ViewportPosition := PointF(VertScrollBox_TabCalc.ViewportPosition.X, 0);
+    Layout1.Align := TAlignLayout.Client;
+    VertScrollBox_TabCalc.RealignContent;
+  end
+  else if tbc_principal.ActiveTab = tabLogin then
+  begin
+    VertScrollBox_TabLog.ViewportPosition := PointF(VertScrollBox_TabLog.ViewportPosition.X, 0);
+    Layout1.Align := TAlignLayout.Client;
+    VertScrollBox_TabLog.RealignContent;
+  end
+  else if tbc_principal.ActiveTab = TabPlacas then
+  begin
+    VertScrollBox_TabPlc.ViewportPosition := PointF(VertScrollBox_TabPlc.ViewportPosition.X, 0);
+    Layout1.Align := TAlignLayout.Client;
+    VertScrollBox_TabPlc.RealignContent;
+  end
+  else if tbc_principal.ActiveTab = TabCadastro then
+  begin
+    VertScrollBox_TabCad.ViewportPosition := PointF(VertScrollBox_TabCad.ViewportPosition.X, 0);
+    Layout1.Align := TAlignLayout.Client;
+    VertScrollBox_TabCad.RealignContent;
+  end
+  else
+  begin
+    VertScrollBox.ViewportPosition := PointF(VertScrollBox.ViewportPosition.X, 0);
+    Layout1.Align := TAlignLayout.Client;
+    VertScrollBox.RealignContent;
+  end;
 end;
 
 procedure TPrincipal.SpeedButton2Click(Sender: TObject);
 begin
   tbc_principal.Tabs[3].IsSelected := True;
   edtCodigo.SetFocus;
+end;
+
+procedure TPrincipal.SpeedButton3Click(Sender: TObject);
+var
+  user, pass: string;
+begin
+  InputBox('Usuário', 'Nome do usuário', user);
+  if SameText(user, '') then
+  begin
+    ShowMessage('Nome do novo usuário não informado');
+    Exit;
+  end;
+
+  InputBox('Senha', 'Senha do novo usuário', pass);
+  if SameText(pass, '') then
+  begin
+    ShowMessage('Senha do novo usuário não informada');
+    Exit;
+  end;
+
+  try
+    FDQuery2.SQL.Text := 'insert into usuarios (usuario, senha, administrador) ' +
+                         'values (:usuario,:senha,:administrador)';
+    FDQuery2.ParamByName('usuario').AsString := user;
+    FDQuery2.ParamByName('senha').AsString := pass;
+    FDQuery2.ParamByName('administrador').AsString := 'F';
+    FDQuery2.ExecSQL;
+  except
+    on e: exception do
+      ShowMessage('Erro: '+E.Message);
+  end;
+
+  edtLogin.Text := '';
+  edtSenha.Text := '';
+  edtLogin.SetFocus;
 end;
 
 procedure TPrincipal.tbc_principalChange(Sender: TObject);
@@ -304,7 +445,7 @@ begin
   Application.Terminate;
 end;
 
-procedure TPrincipal.btn_loginClick(Sender: TObject);
+procedure TPrincipal.EfetuaLogin;
 var
   LoginOK: Boolean;
   user, pass: string;
@@ -340,6 +481,11 @@ begin
   end;
 end;
 
+procedure TPrincipal.btn_loginClick(Sender: TObject);
+begin
+  EfetuaLogin;
+end;
+
 procedure TPrincipal.Button1Click(Sender: TObject);
 begin
   tbc_principal.Tabs[3].IsSelected := True;
@@ -371,6 +517,10 @@ procedure TPrincipal.FormCreate(Sender: TObject);
 begin
   VKAutoShowMode := TVKAutoShowMode.Always;
   VertScrollBox.OnCalcContentBounds := CalcContentBounds;
+  VertScrollBox_TabCalc.OnCalcContentBounds := CalcContentBounds;
+  VertScrollBox_TabLog.OnCalcContentBounds := CalcContentBounds;
+  VertScrollBox_TabPlc.OnCalcContentBounds := CalcContentBounds;
+  VertScrollBox_TabCad.OnCalcContentBounds := CalcContentBounds;
 end;
 
 procedure TPrincipal.FormFocusChanged(Sender: TObject);
@@ -385,9 +535,8 @@ begin
   begin
     if tbc_principal.TabIndex in [2] then
       tbc_principal.Tabs[1].IsSelected := True;
-
-    if tbc_principal.TabIndex = 0 then
-      Application.Terminate;
+//    if tbc_principal.TabIndex = 0 then
+//      Application.Terminate;
   end;
 end;
 
